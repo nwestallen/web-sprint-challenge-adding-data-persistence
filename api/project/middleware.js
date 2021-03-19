@@ -1,4 +1,3 @@
-const Project = require('./model');
 
 const validateProjectPayload = (req, res, next) => {
     const { project_name } = req.body;

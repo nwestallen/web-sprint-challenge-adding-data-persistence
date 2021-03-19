@@ -11,6 +11,12 @@ const getById = resource_id => {
     .first()
 };
 
+const getByName = resource_name => {
+    return db('resources')
+    .where({ resource_name })
+    .first()
+};
+
 const create = resource => {
     return db('resources')
     .insert(resource)
@@ -19,5 +25,6 @@ const create = resource => {
 
 module.exports = {
     getAll,
+    getByName,
     create
 };
