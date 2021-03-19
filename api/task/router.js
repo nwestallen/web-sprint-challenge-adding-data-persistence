@@ -27,10 +27,16 @@ router.post('/', (req, res, next) => {
 });
 
 router.use((err, req, res) => {
-    res.status(500).json({
+    if(process.env.NODE_ENV === 'development') {
+        res.status(500).json({
         error: err.message,
         stack: err.stack
-    })
+        })
+    } else {
+        res.status(500).json({
+            message: 'data cannot be retrieved from server'
+        })
+    }
 });
 
 module.exports = router;
