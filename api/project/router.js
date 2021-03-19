@@ -25,7 +25,19 @@ router.post('/', validateProjectPayload, (req, res, next) => {
         });
     })
     .catch(next);
-})
+});
+
+router.get('/:id/tasks', (req, res, next) => {
+    const project_id = req.params.id;
+    Project.getProjectTasks(project_id)
+    .then(tasks => {
+        res.json(tasks.map(task => ({
+            ...task,
+            task_completed: !!task.task_completed
+        })))
+    })
+    .catch(next);
+});
 
 router.use((err, req, res) => {
     if(process.env.NODE_ENV === 'development') {

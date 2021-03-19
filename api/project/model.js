@@ -17,7 +17,14 @@ const create = project => {
     .then(id => getById(id));
 };
 
+const getProjectTasks = project_id => {
+    return db('tasks')
+    .where({ project_id })
+}
+
 module.exports = {
     getAll,
-    create
-}
+    create,
+    getProjectTasks,
+    getById
+};
