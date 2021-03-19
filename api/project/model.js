@@ -20,11 +20,19 @@ const create = project => {
 const getProjectTasks = project_id => {
     return db('tasks')
     .where({ project_id })
-}
+};
+
+const getProjectResources = project_id => {
+    return db('resources')
+    .select('resources.*', 'project_id')
+    .join('project_resources', 'resources.resource_id', 'project_resources.resource_id')
+    .where({ project_id })
+};
 
 module.exports = {
     getAll,
     create,
     getProjectTasks,
-    getById
+    getById,
+    getProjectResources
 };

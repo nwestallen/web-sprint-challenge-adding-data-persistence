@@ -39,7 +39,17 @@ router.get('/:id/tasks', (req, res, next) => {
     .catch(next);
 });
 
-router.use((err, req, res) => {
+router.get('/:id/resources', (req, res, next) => {
+    console.log('test1')
+    const project_id = req.params.id;
+    Project.getProjectResources(project_id)
+    .then(resources => {
+        res.json(resources)
+    })
+    .catch(next);
+});
+
+router.use((err, req, res, next) => {
     if(process.env.NODE_ENV === 'development') {
         res.status(500).json({
         error: err.message,
